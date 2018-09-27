@@ -34,7 +34,7 @@ When the users viewport-width has reached 1600px the font-size will stay at 12px
    FluidProp-start('font-size', 320, 7);
    FluidProp-step(1024, 10);
    FluidProp-step(1600, 12);
-   FluidProp-endless(.05);
+   FluidProp-endless(.04);
    
 }
 ```
