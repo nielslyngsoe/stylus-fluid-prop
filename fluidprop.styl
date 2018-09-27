@@ -1,0 +1,85 @@
+/**
+ * FluidProp for Stylus
+ * 
+ * @version 1.0
+ * @author Niels Lyngsø
+ * @license MIT License
+ * @website: http://www.github.com/stylus-fluid-prop
+*/
+
+FluidProp__currentPropName = "null";
+FluidProp__currentPropUnit = "px";
+FluidProp__currentMapValue = 0;
+FluidProp__currentSize = 0;
+
+FluidProp-start = @(propertyName, startMappingAt, propertyStartValue, propertyUnit="px") {
+	
+	FluidProp__currentPropName = propertyName;
+	FluidProp__currentPropValue = propertyStartValue;
+	FluidProp__currentMapValue = startMappingAt;
+	FluidProp__currentPropUnit = propertyUnit;
+	
+	{prop}: unit(propertyStartValue, propertyUnit);
+	
+}
+
+FluidProp-step = @(mapAt, propertyValue) {
+	
+	
+	widthDif = mapAt - FluidProp__currentMapValue;
+	sizeDif = propertyValue - FluidProp__currentPropValue;
+	
+	widthAspect = widthDif / FluidProp__currentMapValue;
+	sizeAspect = sizeDif / FluidProp__currentPropValue;   
+	
+	aspect = sizeAspect/widthAspect;
+	
+	baseCalc = unit(FluidProp__currentPropValue, FluidProp__currentPropUnit);
+	additionCalc = ((FluidProp__currentPropValue/FluidProp__currentMapValue)*100)vw;
+	
+	propCalcString = "calc(%s + ((%s - %s) * %s ))" % (baseCalc additionCalc baseCalc aspect);
+	
+	
+	mediaProp = "(min-width: "+unit(FluidProp__currentMapValue, 'px')+") and (max-width: "+unit(mapAt, "px")+")";
+	@media mediaProp {
+		{FluidProp__currentPropName}: propCalcString;
+	}
+	
+	FluidProp__currentPropValue = propertyValue;
+	FluidProp__currentMapValue = mapAt;
+};
+
+FluidProp-stay = @(mapAt) {
+	
+	baseCalc = unit(FluidProp__currentPropValue, FluidProp__currentPropUnit);
+	
+	mediaProp = "(min-width: "+unit(FluidProp__currentMapValue, 'px')+") and (max-width: "+unit(mapAt, "px")+")";
+	@media mediaProp {
+		{FluidProp__currentPropName}: baseCalc;
+	}
+	
+	FluidProp__currentMapValue = mapAt;
+	
+};
+
+FluidProp-end = @() {
+	
+	mediaProp = "(min-width: "+unit(FluidProp__currentMapValue, 'px')+")";
+	@media mediaProp {
+		{FluidProp__currentPropName}: unit(FluidProp__currentPropValue, FluidProp__currentPropUnit);
+	}
+	
+};
+
+FluidProp-endless = @(multiply) {
+	
+	baseCalc = unit(FluidProp__currentPropValue, FluidProp__currentPropUnit);
+	additionCalc = ((FluidProp__currentPropValue/FluidProp__currentMapValue)*100)vw;
+	
+	propCalcString = "calc(%s + ((%s - %s) * %s ))" % (baseCalc additionCalc baseCalc multiply);
+	
+	mediaProp = "(min-width: "+unit(maxWidth, 'px')+")";
+	@media mediaProp {
+		{FluidProp__currentPropName}: propCalcString;
+	}
+};
