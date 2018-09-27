@@ -33,9 +33,9 @@ html {
    FluidProp-start('font-size', 320, 7);
    FluidProp-step(1024, 10);
    FluidProp-step(1600, 12);
-   FluidProp-endless(.1);
+   FluidProp-endless(.05);
    
 }
 
 In this example the font-size will growth endlessly from a viewport width of 1600px and up.
-From 1600px the font-size will grow with 10% of the viewport width growth, meaning that at a viewport of 1700px the fontsize will be 13.2px (cause 10% of 12px is 1.2px).
+From 1600px the font-size will grow with 4% of the viewport width growth, meaning that at a viewport of 1700px the font-size will be 17px (cause 4% of 100px is 4px).
