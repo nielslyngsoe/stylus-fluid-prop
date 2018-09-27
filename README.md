@@ -1,4 +1,4 @@
-## FluidProp
+## Stylus-Fluid-Prop
 > Stylus Fluid Properties — make your properties scale fluidly
 
 For SASS version look here: _Comming soon_
