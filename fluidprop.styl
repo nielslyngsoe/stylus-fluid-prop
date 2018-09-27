@@ -8,12 +8,12 @@
 */
 
 FluidProp = {};
-FluidProp.currentPropName = 'null';
+FluidProp.currentPropName = "null";
 FluidProp.currentMapValue = 1;
 FluidProp.currentPropValue = 1;
 FluidProp.currentPropUnit = "px";
 
-FluidProp-start(propertyName='font-size', startMappingAt=0, propertyStartValue=0, propertyUnit="px") {
+FluidProp-start(propertyName="font-size", startMappingAt=0, propertyStartValue=0, propertyUnit="px") {
 	
 	FluidProp.currentPropName = propertyName;
 	FluidProp.currentMapValue = startMappingAt;
@@ -33,7 +33,7 @@ FluidProp-step(mapAt, propertyValue) {
 	relationRatio = sizeGrowth / viewportGrowth;
 	correction = FluidProp.currentPropValue - FluidProp.currentMapValue * relationRatio;
 	
-	mediaProp = "(min-width: "+unit(FluidProp.currentMapValue, 'px')+") and (max-width: "+unit(mapAt, "px")+")";
+	mediaProp = "(min-width: "+unit(FluidProp.currentMapValue, "px")+") and (max-width: "+unit(mapAt, "px")+")";
 	propertyName = FluidProp.currentPropName;
 	propertyString = "calc(%s + %s)" % (unit(relationRatio*100, "vw") unit(correction, FluidProp.currentPropUnit));
 	
@@ -49,7 +49,7 @@ FluidProp-step(mapAt, propertyValue) {
 FluidProp-stay(mapAt) {
 	
 	
-	mediaProp = "(min-width: "+unit(FluidProp.currentMapValue, 'px')+") and (max-width: "+unit(mapAt, "px")+")";
+	mediaProp = "(min-width: "+unit(FluidProp.currentMapValue, "px")+") and (max-width: "+unit(mapAt, "px")+")";
 	propertyName = FluidProp.currentPropName;
 	propertyString = unit(FluidProp.currentPropValue, FluidProp.currentPropUnit);
 	
